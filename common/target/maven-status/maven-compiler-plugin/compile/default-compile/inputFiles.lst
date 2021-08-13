@@ -1,0 +1,10 @@
+D:\Project\Person\DDD\ddd-demo\common\src\main\java\org\lvwj\common\util\SpringUtil.java
+D:\Project\Person\DDD\ddd-demo\common\src\main\java\org\lvwj\common\domain\BaseEntity.java
+D:\Project\Person\DDD\ddd-demo\common\src\main\java\org\lvwj\common\annotation\DomainService.java
+D:\Project\Person\DDD\ddd-demo\common\src\main\java\org\lvwj\common\annotation\DomainEvent.java
+D:\Project\Person\DDD\ddd-demo\common\src\main\java\org\lvwj\common\annotation\SubEntity.java
+D:\Project\Person\DDD\ddd-demo\common\src\main\java\org\lvwj\common\domain\BaseAggregate.java
+D:\Project\Person\DDD\ddd-demo\common\src\main\java\org\lvwj\common\annotation\ValueObject.java
+D:\Project\Person\DDD\ddd-demo\common\src\main\java\org\lvwj\common\domain\IEnum.java
+D:\Project\Person\DDD\ddd-demo\common\src\main\java\org\lvwj\common\annotation\Aggregate.java
+D:\Project\Person\DDD\ddd-demo\common\src\main\java\org\lvwj\common\domain\BaseEvent.java

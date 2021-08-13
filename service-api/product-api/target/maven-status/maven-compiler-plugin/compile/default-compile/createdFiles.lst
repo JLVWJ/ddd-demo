@@ -1,0 +1,2 @@
+org\lvwj\service\product\api\dto\ProductDTO.class
+org\lvwj\service\product\api\provider\IProductFeign.class
