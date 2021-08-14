@@ -17,6 +17,7 @@ import java.util.List;
  * 2.枚举和枚举值名称之间可以自动转换
  * 3.OrderConverter实现类在target包里(OrderConverterImpl)
  * 4.mapStruct接口更多用法看我发的wiki，自动生成set方法，很强大，有很多高级玩法
+ *
  * @author lvweijie
  * @date 2021-08-12 07:58
  */

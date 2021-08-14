@@ -16,8 +16,12 @@ import java.util.Set;
  * 订单(聚合根)
  *
  * 1.@Builder建造者模式是没有set方法的，DDD不推荐用setXXX来修改字段，因为这个操作没有业务含义，别人看了，不知道这是什么业务逻辑？
- *   推荐对已创建对象的修改 通过自定义业务行为方法来修改字段，例如:orderPayed(),orderFinished()，一看就知道是什么业务行为，而且可以复用。
+ *   推荐通过自定义业务行为方法来驱使字段的变更，而且可以复用，例如:orderPayed(修改订单状态为已支付并添加支付时间),orderFinished(修改订单状态为已完成并添加完成时间)
  * 2.注意看实体和值对象的lombok注解之间的区别，值对象多了@@EqualsAndHashCode. 因为实体通过基类的id来确定唯一标识，而值对象是全字段来确定唯一性。
+ * 3.构建对象有俩种方式：
+ *   3.1 字段少、简单的实体，可以直接在实体内，创建create来构建实体对象,入参只需初始化就有的字段，比如payTime、finishTime初始化就是null不需要作为入参。
+ *   3.2 字段多，复杂的实体，可以新建Factory类，来构建实体对象。
+ * 4.DDD推荐把实体的所有基础类型字段尽可能的建模成值对象(例：String orderNo -> OrderNo orderNo, String id -> OrderId id)
  *
  * @author lvweijie
  * @date 2021/8/12 14:17

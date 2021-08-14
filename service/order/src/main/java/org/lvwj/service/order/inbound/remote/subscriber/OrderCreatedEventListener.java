@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 /**
  * 订单已创建事件处理器(进程内的事件处理器)
+ * 说明：只是为了代码演示
+ * 1. 如果要在同一事务  @Async可以去掉
  *
  * @author lvweijie
  * @date 2021-08-12 16:05
@@ -20,7 +22,7 @@ import org.springframework.stereotype.Component;
 public class OrderCreatedEventListener {
 
 
-    @Async
+    @Async //异步就会不在同一事务
     @Order
     @EventListener(OrderCreatedEvent.class)
     public void handlerEvent(OrderCreatedEvent event) {

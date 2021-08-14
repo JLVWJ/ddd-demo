@@ -1,6 +1,5 @@
 package org.lvwj.common.domain;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -8,15 +7,19 @@ import java.util.Objects;
  * @author lvweijie
  * @date 2021/8/13 17:44
  */
-public abstract class AbstractIdentity<T extends Serializable> implements Identity<T> {
+public abstract class BaseIdentity<T> implements Identity<T> {
     private T value;
 
-    protected AbstractIdentity(T value) {
+    protected BaseIdentity(T value) {
         this.setId(value);
     }
 
     @Override
     public T value() {
+        return getValue();
+    }
+
+    public T getValue() {
         return value;
     }
 
@@ -29,14 +32,14 @@ public abstract class AbstractIdentity<T extends Serializable> implements Identi
     }
 
     protected void validateValue(T value) {
-        // validate value of Identity if need
+        //更多校验逻辑可以在子类重写定义
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AbstractIdentity<?> that = (AbstractIdentity<?>) o;
+        BaseIdentity<?> that = (BaseIdentity<?>) o;
         return value.equals(that.value);
     }
 

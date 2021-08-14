@@ -2,7 +2,7 @@ package org.lvwj.service.order.inbound.remote.provider;
 
 import lombok.RequiredArgsConstructor;
 import org.lvwj.service.order.api.dto.OrderDTO;
-import org.lvwj.service.order.api.dto.cmd.CreateOrderCmd;
+import org.lvwj.service.order.api.dto.cmd.SaveOrderCmd;
 import org.lvwj.service.order.api.provider.IOrderFeign;
 import org.lvwj.service.order.inbound.local.service.command.OrderCmdService;
 import org.lvwj.service.order.inbound.local.service.query.OrderQryService;
@@ -27,7 +27,7 @@ public class OrderFeign implements IOrderFeign {
     }
 
     @Override
-    public Boolean saveOrder(CreateOrderCmd cmd) {
+    public Boolean saveOrder(SaveOrderCmd cmd) {
         return orderCmdService.saveOrder(cmd);
     }
 }
