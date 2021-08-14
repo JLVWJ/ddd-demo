@@ -1,7 +1,7 @@
 package org.lvwj.service.order.outbound.adapter.publisher;
 
 //代码演示说明：MQ发布者的使用举例
-
+// 这里SyncMqProducer没有接口，建议加个ISyncMqProducer接口，接口放在port.publisher包
 //import com.yiautos.dmt.sdk.mq.annotation.MqProducerStore;
 //import lombok.AllArgsConstructor;
 //import lombok.extern.slf4j.Slf4j;

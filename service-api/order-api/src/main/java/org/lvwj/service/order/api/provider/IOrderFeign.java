@@ -1,7 +1,7 @@
 package org.lvwj.service.order.api.provider;
 
 import org.lvwj.service.order.api.dto.OrderDTO;
-import org.lvwj.service.order.api.dto.cmd.CreateOrderCmd;
+import org.lvwj.service.order.api.dto.cmd.SaveOrderCmd;
 
 /**
  * 对外暴露的feign接口
@@ -13,5 +13,5 @@ public interface IOrderFeign {
 
     OrderDTO getOrder(String orderId);
 
-    Boolean saveOrder(CreateOrderCmd cmd);
+    Boolean saveOrder(SaveOrderCmd cmd);
 }

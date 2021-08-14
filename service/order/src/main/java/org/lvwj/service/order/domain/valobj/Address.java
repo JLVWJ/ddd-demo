@@ -5,6 +5,16 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+/**
+ * 值对象：Address，包含省市区等值对象字段和detail字段
+ *
+ * 1.值对象的字段也可以是值对象
+ * 2.通用的值对象就跟基础类型一样，在DDD中叫Domain Primitive，这些值对象可以提升到顶层包或common包 供其它微服务的领域层使用
+ * 3.值对象不只有字段，还有丰富的逻辑方法(fullAddress provinceCity provinceCityCounty等)，遵循了高内聚思想，逻辑方法可以复用
+ *
+ * @author lvweijie
+ * @date 2021/8/14 23:49
+ */
 @Builder
 @Getter
 @ToString
