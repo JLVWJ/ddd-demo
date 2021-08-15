@@ -54,14 +54,15 @@ public class OrderCmdService {
         if (!isExist) {
             //throw new
         }
-        //region 2.用请求命令DTO(CreateOrderCmd)来组装领域层对象(Order、OrderItem)，这里代码演示 所以直接写死了，正常是CreateOrderCmd字段转成Order字段
+        //region 2.用请求命令DTO(CreateOrderCmd)来组装领域层对象(Order、OrderItem)
+        //这里代码演示 所以直接写死了，正常是CreateOrderCmd字段转成Order字段,可以手写set，也可以用转换器
         OrderStatus status = OrderStatus.CREATED;
         final Province province = Province.builder().code("123").name("福建省").build();
         final City city = City.builder().code("456").name("厦门市").build();
         final County county = County.builder().code("789").name("集美区").build();
-        Address address = Address.builder().province(province).city(city).county(county).detail("孙坂北路801号402室").build();
-        final Name name = Name.builder().value("吕伟杰").build();
-        final Phone phone = Phone.builder().value("15359450827").build();
+        Address address = Address.builder().province(province).city(city).county(county).detail("孙坂北路xxx号xxx室").build();
+        final Name name = Name.builder().value("lwj").build();
+        final Phone phone = Phone.builder().value("1555555555").build();
         final Person person = Person.builder().name(name).phone(phone).build();
         final Contract contract = Contract.builder().id("123456").code("23456789").contractor(person).createTime(LocalDateTime.now()).build();
 
@@ -77,7 +78,7 @@ public class OrderCmdService {
         Boolean result = orderRepository.saveOrder(order);
         //5.创建订单之后，发布领域事件，订阅者如果是当前进程内的 可以用SpringUtil.publishEvent，当前微服务的其他聚合来消费
         //  如果是跨进程的，可以用RabbitMQ发送，其他微服务来消费，比如库存微服务、支付微服务、消息通知微服务等
-        if (null == cmd.getOrderDTO().getId()) {
+        if (null == cmd.getOrder().getId()) {
             //5.1 SpringUtil.publishEvent(OrderCreatedEvent);
             //5.2 RabbitMQ发送
         }

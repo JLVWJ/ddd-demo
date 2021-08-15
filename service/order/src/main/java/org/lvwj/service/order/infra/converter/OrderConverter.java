@@ -40,7 +40,7 @@ public interface OrderConverter {
             @Mapping(source = "contractId", target = "contract.id"),
             @Mapping(source = "contractCode", target = "contract.code"),
     })
-    Order toOrder(OrderDO orderDO);
+    Order orderDoToOrder(OrderDO orderDO);
 
     /**
      * 会自动用Order toOrder(OrderDO orderDO)进行集合转换
@@ -49,9 +49,9 @@ public interface OrderConverter {
      * @param orderDOs
      * @return java.util.List<org.lvwj.service.order.domain.entity.Order>
      * @author lvweijie
-     * @date 2021/8/13 15:48
+     * @date 2021/8/13 15:48  orderItemDosToOrderItemList
      */
-    List<Order> toOrderList(List<OrderDO> orderDOs);
+    List<Order> orderDosToOrderList(List<OrderDO> orderDOs);
 
     @Mappings({
             @Mapping(source = "productId", target = "productSnapShot.productId"),
@@ -60,9 +60,9 @@ public interface OrderConverter {
             @Mapping(source = "purchasePrice", target = "productSnapShot.purchasePrice"),
             @Mapping(source = "indicativePrice", target = "productSnapShot.indicativePrice"),
     })
-    OrderItem toOrderItem(OrderItemDO orderItemDO);
+    OrderItem orderItemDOToOrderItem(OrderItemDO orderItemDO);
 
-    List<OrderItem> toOrderItemList(List<OrderItemDO> orderItemDOs);
+    List<OrderItem> orderItemDosToOrderItemList(List<OrderItemDO> orderItemDOs);
 
     /**
      * 领域实体 -> 数据实体
@@ -80,7 +80,7 @@ public interface OrderConverter {
             @Mapping(target = "contractId", source = "contract.id"),
             @Mapping(target = "contractCode", source = "contract.code"),
     })
-    OrderDO toOrderDO(Order order);
+    OrderDO orderToOrderDO(Order order);
 
     @Mappings({
             @Mapping(target = "productId", source = "productSnapShot.productId"),
@@ -89,7 +89,7 @@ public interface OrderConverter {
             @Mapping(target = "purchasePrice", source = "productSnapShot.purchasePrice"),
             @Mapping(target = "indicativePrice", source = "productSnapShot.indicativePrice"),
     })
-    OrderItemDO toOrderItemDO(OrderItem orderItem);
+    OrderItemDO orderItemToOrderItemDO(OrderItem orderItem);
 
     /**
      * 数据实体 -> 数据传输实体(DTO)
@@ -99,7 +99,47 @@ public interface OrderConverter {
      * @author lvweijie
      * @date 2021/8/12 8:44
      */
-    OrderDTO toOrderDTO(OrderDO orderDO);
+    OrderDTO orderDoToOrderDTO(OrderDO orderDO);
 
-    OrderItemDTO toOrderItemDTO(OrderItemDO orderItemDO);
+    OrderItemDTO orderItemDoToOrderItemDTO(OrderItemDO orderItemDO);
+
+    /**
+     * DTO -> 领域实体
+     *
+     * @param orderDTO
+     * @return org.lvwj.service.order.domain.entity.Order
+     * @author lvweijie
+     * @date 2021/8/12 8:38
+     */
+    @Mappings({
+            @Mapping(source = "provinceCode", target = "collectAddress.province.code"),
+            @Mapping(source = "provinceName", target = "collectAddress.province.name"),
+            @Mapping(source = "collectPersonName", target = "collectPerson.name.value"),
+            @Mapping(source = "collectPersonPhone", target = "collectPerson.phone.value"),
+            @Mapping(source = "contractId", target = "contract.id"),
+            @Mapping(source = "contractCode", target = "contract.code"),
+    })
+    Order orderDtoToOrder(OrderDTO orderDTO);
+
+    /**
+     * 会自动用Order toOrder(OrderDO orderDO)进行集合转换
+     * 不需要在配置Mapping
+     *
+     * @param orderDTOs
+     * @return java.util.List<org.lvwj.service.order.domain.entity.Order>
+     * @author lvweijie
+     * @date 2021/8/13 15:48
+     */
+    List<Order> orderDTOsToOrderList(List<OrderDTO> orderDTOs);
+
+    @Mappings({
+            @Mapping(source = "productId", target = "productSnapShot.productId"),
+            @Mapping(source = "productName", target = "productSnapShot.productName"),
+            @Mapping(source = "productCode", target = "productSnapShot.productCode"),
+            @Mapping(source = "purchasePrice", target = "productSnapShot.purchasePrice"),
+            @Mapping(source = "indicativePrice", target = "productSnapShot.indicativePrice"),
+    })
+    OrderItem orderItemDtoToOrderItem(OrderItemDTO orderItemDTO);
+
+    List<OrderItem> orderItemDTOsToOrderItemList(List<OrderItemDTO> orderItemDTOs);
 }

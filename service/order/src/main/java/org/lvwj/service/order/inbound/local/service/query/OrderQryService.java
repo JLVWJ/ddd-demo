@@ -52,6 +52,6 @@ public class OrderQryService {
         XX xx = productApiClient.getXXX();
         orderDO.set(xx);
         */
-        return orderConverter.toOrderDTO(orderDO);
+        return orderConverter.orderDoToOrderDTO(orderDO);
     }
 }

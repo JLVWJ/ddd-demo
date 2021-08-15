@@ -1,20 +1,23 @@
 org\lvwj\service\order\domain\entity\Order$OrderBuilder.class
+org\lvwj\service\order\domain\event\source\OrderCreatedEventSource.class
 org\lvwj\service\order\infra\converter\OrderConverterImpl.class
 org\lvwj\service\order\domain\valobj\Phone$PhoneBuilder.class
 org\lvwj\service\order\domain\valobj\Person.class
 org\lvwj\service\order\domain\valobj\Province$ProvinceBuilder.class
 org\lvwj\service\order\inbound\remote\provider\OrderFeign.class
+org\lvwj\service\order\domain\service\OrderChangeContractService.class
 org\lvwj\service\order\domain\valobj\City.class
 org\lvwj\service\order\domain\valobj\Name.class
 org\lvwj\service\order\inbound\remote\controller\OrderController.class
+org\lvwj\service\order\domain\event\source\OrderCreatedEventSource$OrderCreatedEventSourceBuilder.class
 org\lvwj\service\order\infra\persistence\mybatis\mapper\OrderItemMapper.class
 org\lvwj\service\order\domain\valobj\DiscountType.class
 org\lvwj\service\order\inbound\local\service\query\OrderQryService.class
 org\lvwj\service\order\infra\converter\OrderConverter.class
 org\lvwj\service\order\domain\valobj\Contract$ContractBuilder.class
 org\lvwj\service\order\infra\persistence\mybatis\mapper\OrderMapper.class
-org\lvwj\service\order\infra\util\EnumUtil.class
 org\lvwj\service\order\infra\persistence\mybatis\entity\OrderItemDO.class
+org\lvwj\service\order\outbound\adapter\client\ContractApiClient.class
 org\lvwj\service\order\infra\persistence\mybatis\entity\OrderDO.class
 org\lvwj\service\order\domain\valobj\Contract.class
 org\lvwj\service\order\domain\entity\OrderItem$OrderItemBuilder.class
@@ -27,6 +30,7 @@ org\lvwj\service\order\outbound\port\client\INumberApiClient.class
 org\lvwj\service\order\domain\entity\Order.class
 org\lvwj\service\order\domain\event\OrderCreatedEvent.class
 org\lvwj\service\order\domain\valobj\City$CityBuilder.class
+org\lvwj\service\order\domain\valobj\OrderId.class
 org\lvwj\service\order\domain\valobj\Person$PersonBuilder.class
 org\lvwj\service\order\domain\valobj\Phone.class
 org\lvwj\service\order\inbound\local\service\command\OrderCmdService.class
@@ -34,7 +38,6 @@ org\lvwj\service\order\domain\valobj\ProductSnapShot.class
 org\lvwj\service\order\domain\valobj\Province.class
 org\lvwj\service\order\domain\valobj\County.class
 org\lvwj\service\order\outbound\adapter\client\ProductApiClient.class
-org\lvwj\service\order\domain\event\obj\OrderCreatedEventObj.class
 org\lvwj\service\order\domain\valobj\Address$AddressBuilder.class
 org\lvwj\service\order\outbound\adapter\client\NumberApiClient.class
 org\lvwj\service\order\outbound\adapter\repository\OrderRepositoryImpl.class
@@ -42,3 +45,4 @@ org\lvwj\service\order\outbound\port\client\IProductApiClient.class
 org\lvwj\service\order\domain\valobj\Address.class
 org\lvwj\service\order\domain\valobj\County$CountyBuilder.class
 org\lvwj\service\order\domain\valobj\OrderStatus.class
+org\lvwj\service\order\outbound\port\client\IContractApiClient.class
