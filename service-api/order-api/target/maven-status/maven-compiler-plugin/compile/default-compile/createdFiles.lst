@@ -1,5 +1,5 @@
 org\lvwj\service\order\api\provider\IOrderFeign.class
 org\lvwj\service\order\api\dto\OrderDTO.class
 org\lvwj\service\order\api\dto\qry\SearchOrderQry.class
-org\lvwj\service\order\api\dto\cmd\CreateOrderCmd.class
 org\lvwj\service\order\api\dto\OrderItemDTO.class
+org\lvwj\service\order\api\dto\cmd\SaveOrderCmd.class

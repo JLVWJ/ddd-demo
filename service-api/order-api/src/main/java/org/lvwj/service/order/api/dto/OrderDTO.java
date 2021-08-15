@@ -14,7 +14,7 @@ public class OrderDTO {
 
     private String id;
     private String orderNo;
-    private Integer status;
+    private String status;
     private String provinceName;
     private String provinceCode;
     private String collectPersonName;

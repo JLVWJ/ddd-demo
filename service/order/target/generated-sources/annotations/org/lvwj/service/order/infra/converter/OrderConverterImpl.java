@@ -33,14 +33,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-08-13T15:50:32+0800",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_281 (Oracle Corporation)"
+    date = "2021-08-15T10:03:25+0800",
+    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_231 (Oracle Corporation)"
 )
 @Component
 public class OrderConverterImpl implements OrderConverter {
 
     @Override
-    public Order toOrder(OrderDO orderDO) {
+    public Order orderDoToOrder(OrderDO orderDO) {
         if ( orderDO == null ) {
             return null;
         }
@@ -60,21 +60,21 @@ public class OrderConverterImpl implements OrderConverter {
     }
 
     @Override
-    public List<Order> toOrderList(List<OrderDO> orderDOs) {
+    public List<Order> orderDosToOrderList(List<OrderDO> orderDOs) {
         if ( orderDOs == null ) {
             return null;
         }
 
         List<Order> list = new ArrayList<Order>( orderDOs.size() );
         for ( OrderDO orderDO : orderDOs ) {
-            list.add( toOrder( orderDO ) );
+            list.add( orderDoToOrder( orderDO ) );
         }
 
         return list;
     }
 
     @Override
-    public OrderItem toOrderItem(OrderItemDO orderItemDO) {
+    public OrderItem orderItemDOToOrderItem(OrderItemDO orderItemDO) {
         if ( orderItemDO == null ) {
             return null;
         }
@@ -89,21 +89,21 @@ public class OrderConverterImpl implements OrderConverter {
     }
 
     @Override
-    public List<OrderItem> toOrderItemList(List<OrderItemDO> orderItemDOs) {
+    public List<OrderItem> orderItemDosToOrderItemList(List<OrderItemDO> orderItemDOs) {
         if ( orderItemDOs == null ) {
             return null;
         }
 
         List<OrderItem> list = new ArrayList<OrderItem>( orderItemDOs.size() );
         for ( OrderItemDO orderItemDO : orderItemDOs ) {
-            list.add( toOrderItem( orderItemDO ) );
+            list.add( orderItemDOToOrderItem( orderItemDO ) );
         }
 
         return list;
     }
 
     @Override
-    public OrderDO toOrderDO(Order order) {
+    public OrderDO orderToOrderDO(Order order) {
         if ( order == null ) {
             return null;
         }
@@ -127,7 +127,7 @@ public class OrderConverterImpl implements OrderConverter {
     }
 
     @Override
-    public OrderItemDO toOrderItemDO(OrderItem orderItem) {
+    public OrderItemDO orderItemToOrderItemDO(OrderItem orderItem) {
         if ( orderItem == null ) {
             return null;
         }
@@ -147,7 +147,7 @@ public class OrderConverterImpl implements OrderConverter {
     }
 
     @Override
-    public OrderDTO toOrderDTO(OrderDO orderDO) {
+    public OrderDTO orderDoToOrderDTO(OrderDO orderDO) {
         if ( orderDO == null ) {
             return null;
         }
@@ -156,9 +156,7 @@ public class OrderConverterImpl implements OrderConverter {
 
         orderDTO.setId( orderDO.getId() );
         orderDTO.setOrderNo( orderDO.getOrderNo() );
-        if ( orderDO.getStatus() != null ) {
-            orderDTO.setStatus( Integer.parseInt( orderDO.getStatus() ) );
-        }
+        orderDTO.setStatus( orderDO.getStatus() );
         orderDTO.setProvinceName( orderDO.getProvinceName() );
         orderDTO.setProvinceCode( orderDO.getProvinceCode() );
         orderDTO.setCollectPersonName( orderDO.getCollectPersonName() );
@@ -171,7 +169,7 @@ public class OrderConverterImpl implements OrderConverter {
     }
 
     @Override
-    public OrderItemDTO toOrderItemDTO(OrderItemDO orderItemDO) {
+    public OrderItemDTO orderItemDoToOrderItemDTO(OrderItemDO orderItemDO) {
         if ( orderItemDO == null ) {
             return null;
         }
@@ -187,6 +185,69 @@ public class OrderConverterImpl implements OrderConverter {
         orderItemDTO.setIndicativePrice( orderItemDO.getIndicativePrice() );
 
         return orderItemDTO;
+    }
+
+    @Override
+    public Order orderDtoToOrder(OrderDTO orderDTO) {
+        if ( orderDTO == null ) {
+            return null;
+        }
+
+        OrderBuilder order = Order.builder();
+
+        order.collectAddress( orderDTOToAddress( orderDTO ) );
+        order.collectPerson( orderDTOToPerson( orderDTO ) );
+        order.contract( orderDTOToContract( orderDTO ) );
+        order.orderNo( orderDTO.getOrderNo() );
+        if ( orderDTO.getStatus() != null ) {
+            order.status( Enum.valueOf( OrderStatus.class, orderDTO.getStatus() ) );
+        }
+        order.orderItems( orderItemDTOListToOrderItemSet( orderDTO.getOrderItems() ) );
+
+        return order.build();
+    }
+
+    @Override
+    public List<Order> orderDTOsToOrderList(List<OrderDTO> orderDTOs) {
+        if ( orderDTOs == null ) {
+            return null;
+        }
+
+        List<Order> list = new ArrayList<Order>( orderDTOs.size() );
+        for ( OrderDTO orderDTO : orderDTOs ) {
+            list.add( orderDtoToOrder( orderDTO ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public OrderItem orderItemDtoToOrderItem(OrderItemDTO orderItemDTO) {
+        if ( orderItemDTO == null ) {
+            return null;
+        }
+
+        OrderItemBuilder orderItem = OrderItem.builder();
+
+        orderItem.productSnapShot( orderItemDTOToProductSnapShot( orderItemDTO ) );
+        orderItem.num( orderItemDTO.getNum() );
+        orderItem.orderId( orderItemDTO.getOrderId() );
+
+        return orderItem.build();
+    }
+
+    @Override
+    public List<OrderItem> orderItemDTOsToOrderItemList(List<OrderItemDTO> orderItemDTOs) {
+        if ( orderItemDTOs == null ) {
+            return null;
+        }
+
+        List<OrderItem> list = new ArrayList<OrderItem>( orderItemDTOs.size() );
+        for ( OrderItemDTO orderItemDTO : orderItemDTOs ) {
+            list.add( orderItemDtoToOrderItem( orderItemDTO ) );
+        }
+
+        return list;
     }
 
     protected Province orderDOToProvince(OrderDO orderDO) {
@@ -271,7 +332,7 @@ public class OrderConverterImpl implements OrderConverter {
 
         Set<OrderItem> set = new HashSet<OrderItem>( Math.max( (int) ( list.size() / .75f ) + 1, 16 ) );
         for ( OrderItemDO orderItemDO : list ) {
-            set.add( toOrderItem( orderItemDO ) );
+            set.add( orderItemDOToOrderItem( orderItemDO ) );
         }
 
         return set;
@@ -406,7 +467,7 @@ public class OrderConverterImpl implements OrderConverter {
 
         List<OrderItemDO> list = new ArrayList<OrderItemDO>( set.size() );
         for ( OrderItem orderItem : set ) {
-            list.add( toOrderItemDO( orderItem ) );
+            list.add( orderItemToOrderItemDO( orderItem ) );
         }
 
         return list;
@@ -494,9 +555,113 @@ public class OrderConverterImpl implements OrderConverter {
 
         List<OrderItemDTO> list1 = new ArrayList<OrderItemDTO>( list.size() );
         for ( OrderItemDO orderItemDO : list ) {
-            list1.add( toOrderItemDTO( orderItemDO ) );
+            list1.add( orderItemDoToOrderItemDTO( orderItemDO ) );
         }
 
         return list1;
+    }
+
+    protected Province orderDTOToProvince(OrderDTO orderDTO) {
+        if ( orderDTO == null ) {
+            return null;
+        }
+
+        ProvinceBuilder province = Province.builder();
+
+        province.code( orderDTO.getProvinceCode() );
+        province.name( orderDTO.getProvinceName() );
+
+        return province.build();
+    }
+
+    protected Address orderDTOToAddress(OrderDTO orderDTO) {
+        if ( orderDTO == null ) {
+            return null;
+        }
+
+        AddressBuilder address = Address.builder();
+
+        address.province( orderDTOToProvince( orderDTO ) );
+
+        return address.build();
+    }
+
+    protected Name orderDTOToName(OrderDTO orderDTO) {
+        if ( orderDTO == null ) {
+            return null;
+        }
+
+        NameBuilder name = Name.builder();
+
+        name.value( orderDTO.getCollectPersonName() );
+
+        return name.build();
+    }
+
+    protected Phone orderDTOToPhone(OrderDTO orderDTO) {
+        if ( orderDTO == null ) {
+            return null;
+        }
+
+        PhoneBuilder phone = Phone.builder();
+
+        phone.value( orderDTO.getCollectPersonPhone() );
+
+        return phone.build();
+    }
+
+    protected Person orderDTOToPerson(OrderDTO orderDTO) {
+        if ( orderDTO == null ) {
+            return null;
+        }
+
+        PersonBuilder person = Person.builder();
+
+        person.name( orderDTOToName( orderDTO ) );
+        person.phone( orderDTOToPhone( orderDTO ) );
+
+        return person.build();
+    }
+
+    protected Contract orderDTOToContract(OrderDTO orderDTO) {
+        if ( orderDTO == null ) {
+            return null;
+        }
+
+        ContractBuilder contract = Contract.builder();
+
+        contract.id( orderDTO.getContractId() );
+        contract.code( orderDTO.getContractCode() );
+
+        return contract.build();
+    }
+
+    protected Set<OrderItem> orderItemDTOListToOrderItemSet(List<OrderItemDTO> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        Set<OrderItem> set = new HashSet<OrderItem>( Math.max( (int) ( list.size() / .75f ) + 1, 16 ) );
+        for ( OrderItemDTO orderItemDTO : list ) {
+            set.add( orderItemDtoToOrderItem( orderItemDTO ) );
+        }
+
+        return set;
+    }
+
+    protected ProductSnapShot orderItemDTOToProductSnapShot(OrderItemDTO orderItemDTO) {
+        if ( orderItemDTO == null ) {
+            return null;
+        }
+
+        ProductSnapShotBuilder productSnapShot = ProductSnapShot.builder();
+
+        productSnapShot.productId( orderItemDTO.getProductId() );
+        productSnapShot.productName( orderItemDTO.getProductName() );
+        productSnapShot.productCode( orderItemDTO.getProductCode() );
+        productSnapShot.purchasePrice( orderItemDTO.getPurchasePrice() );
+        productSnapShot.indicativePrice( orderItemDTO.getIndicativePrice() );
+
+        return productSnapShot.build();
     }
 }

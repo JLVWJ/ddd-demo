@@ -52,7 +52,7 @@ public class OrderRepositoryImpl implements OrderRepository {
         OrderDO orderDO = orderMapper.selectById(id);
         List<OrderItemDO> orderItemDOS = orderItemMapper.listByOrderId(id);
         orderDO.setOrderItems(orderItemDOS);
-        final Order order = orderConverter.toOrder(orderDO);
+        final Order order = orderConverter.orderDoToOrder(orderDO);
         return Optional.ofNullable(order);
     }
 
@@ -67,7 +67,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     @Override
     public Boolean saveOrder(Order order) {
         final String orderId = order.getId();
-        final OrderDO orderDO = orderConverter.toOrderDO(order);
+        final OrderDO orderDO = orderConverter.orderToOrderDO(order);
         final List<OrderItemDO> orderItems = orderDO.getOrderItems();
         if (null == orderId) {
             orderMapper.insert(orderDO);

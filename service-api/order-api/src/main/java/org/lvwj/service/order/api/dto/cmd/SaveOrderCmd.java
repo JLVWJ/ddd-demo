@@ -19,7 +19,7 @@ public class SaveOrderCmd {
 
     @Valid
     @NotNull(message = "订单信息不能为null!")
-    private OrderDTO orderDTO;
+    private OrderDTO order;
     
     //...其它字段
 }

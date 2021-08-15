@@ -1,5 +1,7 @@
 package org.lvwj.common.domain;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import java.util.Arrays;
 
 /**
@@ -9,6 +11,7 @@ import java.util.Arrays;
  * @date 2021-08-13 10:07
  */
 public interface BaseEnum {
+    @JsonValue
     Integer getCode();
 
     String getName();
