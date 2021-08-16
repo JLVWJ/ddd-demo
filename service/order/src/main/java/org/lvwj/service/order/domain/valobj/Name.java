@@ -17,6 +17,10 @@ import lombok.ToString;
 public class Name {
     String value;
 
+    public static Name create(String value) {
+        return Name.builder().value(value).build();
+    }
+
     /**
      * 姓
      *

@@ -24,6 +24,10 @@ public class Phone {
 
     String value;
 
+    public static Phone create(String value) {
+        return Phone.builder().value(value).build();
+    }
+
     /**
      * 手机号后4位
      *

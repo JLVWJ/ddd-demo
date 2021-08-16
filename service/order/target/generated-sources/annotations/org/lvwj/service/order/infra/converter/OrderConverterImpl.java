@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.Generated;
+import org.lvwj.common.domain.primitive.Money;
+import org.lvwj.common.domain.primitive.Money.MoneyBuilder;
 import org.lvwj.service.order.api.dto.OrderDTO;
 import org.lvwj.service.order.api.dto.OrderItemDTO;
 import org.lvwj.service.order.domain.entity.Order;
@@ -33,8 +35,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-08-15T10:03:25+0800",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_231 (Oracle Corporation)"
+    date = "2021-08-16T16:39:02+0800",
+    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_281 (Oracle Corporation)"
 )
 @Component
 public class OrderConverterImpl implements OrderConverter {
@@ -137,8 +139,8 @@ public class OrderConverterImpl implements OrderConverter {
         orderItemDO.setProductId( orderItemProductSnapShotProductId( orderItem ) );
         orderItemDO.setProductName( orderItemProductSnapShotProductName( orderItem ) );
         orderItemDO.setProductCode( orderItemProductSnapShotProductCode( orderItem ) );
-        orderItemDO.setPurchasePrice( orderItemProductSnapShotPurchasePrice( orderItem ) );
-        orderItemDO.setIndicativePrice( orderItemProductSnapShotIndicativePrice( orderItem ) );
+        orderItemDO.setPurchasePrice( orderItemProductSnapShotPurchasePriceValue( orderItem ) );
+        orderItemDO.setIndicativePrice( orderItemProductSnapShotIndicativePriceValue( orderItem ) );
         orderItemDO.setId( orderItem.getId() );
         orderItemDO.setNum( orderItem.getNum() );
         orderItemDO.setOrderId( orderItem.getOrderId() );
@@ -338,6 +340,30 @@ public class OrderConverterImpl implements OrderConverter {
         return set;
     }
 
+    protected Money orderItemDOToMoney(OrderItemDO orderItemDO) {
+        if ( orderItemDO == null ) {
+            return null;
+        }
+
+        MoneyBuilder money = Money.builder();
+
+        money.value( orderItemDO.getPurchasePrice() );
+
+        return money.build();
+    }
+
+    protected Money orderItemDOToMoney1(OrderItemDO orderItemDO) {
+        if ( orderItemDO == null ) {
+            return null;
+        }
+
+        MoneyBuilder money = Money.builder();
+
+        money.value( orderItemDO.getIndicativePrice() );
+
+        return money.build();
+    }
+
     protected ProductSnapShot orderItemDOToProductSnapShot(OrderItemDO orderItemDO) {
         if ( orderItemDO == null ) {
             return null;
@@ -345,11 +371,11 @@ public class OrderConverterImpl implements OrderConverter {
 
         ProductSnapShotBuilder productSnapShot = ProductSnapShot.builder();
 
+        productSnapShot.purchasePrice( orderItemDOToMoney( orderItemDO ) );
+        productSnapShot.indicativePrice( orderItemDOToMoney1( orderItemDO ) );
         productSnapShot.productId( orderItemDO.getProductId() );
         productSnapShot.productName( orderItemDO.getProductName() );
         productSnapShot.productCode( orderItemDO.getProductCode() );
-        productSnapShot.purchasePrice( orderItemDO.getPurchasePrice() );
-        productSnapShot.indicativePrice( orderItemDO.getIndicativePrice() );
 
         return productSnapShot.build();
     }
@@ -518,7 +544,7 @@ public class OrderConverterImpl implements OrderConverter {
         return productCode;
     }
 
-    private BigDecimal orderItemProductSnapShotPurchasePrice(OrderItem orderItem) {
+    private BigDecimal orderItemProductSnapShotPurchasePriceValue(OrderItem orderItem) {
         if ( orderItem == null ) {
             return null;
         }
@@ -526,14 +552,18 @@ public class OrderConverterImpl implements OrderConverter {
         if ( productSnapShot == null ) {
             return null;
         }
-        BigDecimal purchasePrice = productSnapShot.getPurchasePrice();
+        Money purchasePrice = productSnapShot.getPurchasePrice();
         if ( purchasePrice == null ) {
             return null;
         }
-        return purchasePrice;
+        BigDecimal value = purchasePrice.getValue();
+        if ( value == null ) {
+            return null;
+        }
+        return value;
     }
 
-    private BigDecimal orderItemProductSnapShotIndicativePrice(OrderItem orderItem) {
+    private BigDecimal orderItemProductSnapShotIndicativePriceValue(OrderItem orderItem) {
         if ( orderItem == null ) {
             return null;
         }
@@ -541,11 +571,15 @@ public class OrderConverterImpl implements OrderConverter {
         if ( productSnapShot == null ) {
             return null;
         }
-        BigDecimal indicativePrice = productSnapShot.getIndicativePrice();
+        Money indicativePrice = productSnapShot.getIndicativePrice();
         if ( indicativePrice == null ) {
             return null;
         }
-        return indicativePrice;
+        BigDecimal value = indicativePrice.getValue();
+        if ( value == null ) {
+            return null;
+        }
+        return value;
     }
 
     protected List<OrderItemDTO> orderItemDOListToOrderItemDTOList(List<OrderItemDO> list) {
@@ -649,6 +683,30 @@ public class OrderConverterImpl implements OrderConverter {
         return set;
     }
 
+    protected Money orderItemDTOToMoney(OrderItemDTO orderItemDTO) {
+        if ( orderItemDTO == null ) {
+            return null;
+        }
+
+        MoneyBuilder money = Money.builder();
+
+        money.value( orderItemDTO.getPurchasePrice() );
+
+        return money.build();
+    }
+
+    protected Money orderItemDTOToMoney1(OrderItemDTO orderItemDTO) {
+        if ( orderItemDTO == null ) {
+            return null;
+        }
+
+        MoneyBuilder money = Money.builder();
+
+        money.value( orderItemDTO.getIndicativePrice() );
+
+        return money.build();
+    }
+
     protected ProductSnapShot orderItemDTOToProductSnapShot(OrderItemDTO orderItemDTO) {
         if ( orderItemDTO == null ) {
             return null;
@@ -656,11 +714,11 @@ public class OrderConverterImpl implements OrderConverter {
 
         ProductSnapShotBuilder productSnapShot = ProductSnapShot.builder();
 
+        productSnapShot.purchasePrice( orderItemDTOToMoney( orderItemDTO ) );
+        productSnapShot.indicativePrice( orderItemDTOToMoney1( orderItemDTO ) );
         productSnapShot.productId( orderItemDTO.getProductId() );
         productSnapShot.productName( orderItemDTO.getProductName() );
         productSnapShot.productCode( orderItemDTO.getProductCode() );
-        productSnapShot.purchasePrice( orderItemDTO.getPurchasePrice() );
-        productSnapShot.indicativePrice( orderItemDTO.getIndicativePrice() );
 
         return productSnapShot.build();
     }

@@ -68,13 +68,15 @@ public class OrderItem extends BaseEntity<String> {
     /**
      * 订单明细金额 = 明细数量 x 商品指导价
      *
+     * 代码演示，没有处理空指针
+     *
      * @param
      * @return java.math.BigDecimal
      * @author lvweijie
      * @date 2021/8/11 23:18
      */
     public BigDecimal amount() {
-        return productSnapShot.getIndicativePrice().multiply(new BigDecimal(num)).setScale(2, RoundingMode.HALF_UP);
+        return productSnapShot.getIndicativePrice().getValue().multiply(new BigDecimal(num)).setScale(2, RoundingMode.HALF_UP);
     }
 
 }

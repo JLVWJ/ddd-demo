@@ -32,6 +32,21 @@ public class Address {
     String detail;
 
     /**
+     * 构建Address
+     *
+     * @param province
+     * @param city
+     * @param county
+     * @param detail
+     * @return org.lvwj.service.order.domain.valobj.Address
+     * @author lvweijie
+     * @date 2021/8/16 16:08
+     */
+    public static Address create(Province province, City city, County county, String detail) {
+        return Address.builder().province(province).city(city).county(county).detail(detail).build();
+    }
+
+    /**
      * 具体地址=省市县+详细地址 (例：福建省厦门市集美区孙坂北路801号402室)
      *
      * @param separator

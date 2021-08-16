@@ -57,8 +57,8 @@ public interface OrderConverter {
             @Mapping(source = "productId", target = "productSnapShot.productId"),
             @Mapping(source = "productName", target = "productSnapShot.productName"),
             @Mapping(source = "productCode", target = "productSnapShot.productCode"),
-            @Mapping(source = "purchasePrice", target = "productSnapShot.purchasePrice"),
-            @Mapping(source = "indicativePrice", target = "productSnapShot.indicativePrice"),
+            @Mapping(source = "purchasePrice", target = "productSnapShot.purchasePrice.value"),
+            @Mapping(source = "indicativePrice", target = "productSnapShot.indicativePrice.value"),
     })
     OrderItem orderItemDOToOrderItem(OrderItemDO orderItemDO);
 
@@ -86,8 +86,8 @@ public interface OrderConverter {
             @Mapping(target = "productId", source = "productSnapShot.productId"),
             @Mapping(target = "productName", source = "productSnapShot.productName"),
             @Mapping(target = "productCode", source = "productSnapShot.productCode"),
-            @Mapping(target = "purchasePrice", source = "productSnapShot.purchasePrice"),
-            @Mapping(target = "indicativePrice", source = "productSnapShot.indicativePrice"),
+            @Mapping(target = "purchasePrice", source = "productSnapShot.purchasePrice.value"),
+            @Mapping(target = "indicativePrice", source = "productSnapShot.indicativePrice.value"),
     })
     OrderItemDO orderItemToOrderItemDO(OrderItem orderItem);
 
@@ -136,8 +136,8 @@ public interface OrderConverter {
             @Mapping(source = "productId", target = "productSnapShot.productId"),
             @Mapping(source = "productName", target = "productSnapShot.productName"),
             @Mapping(source = "productCode", target = "productSnapShot.productCode"),
-            @Mapping(source = "purchasePrice", target = "productSnapShot.purchasePrice"),
-            @Mapping(source = "indicativePrice", target = "productSnapShot.indicativePrice"),
+            @Mapping(source = "purchasePrice", target = "productSnapShot.purchasePrice.value"),
+            @Mapping(source = "indicativePrice", target = "productSnapShot.indicativePrice.value"),
     })
     OrderItem orderItemDtoToOrderItem(OrderItemDTO orderItemDTO);
 

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 /**
  * 通用值对象(domain primitive(简称:领域基础类型)): 钱
@@ -21,8 +22,14 @@ public class Money {
     BigDecimal value;
     Currency currency;
 
+
     public static Money create(BigDecimal value, Currency currency) {
-        return Money.builder().value(value).currency(currency).build();
+        return Money.builder().value(Optional.ofNullable(value).orElse(BigDecimal.ZERO)).currency(currency).build();
+    }
+
+    public static Money create(BigDecimal value) {
+        final Currency rmb = Currency.create("¥", "RMB", "人名币");
+        return create(value,rmb);
     }
 
 
@@ -44,5 +51,25 @@ public class Money {
 
     public Money subtract(BigDecimal amount) {
         return Money.create(this.value.subtract(amount), this.getCurrency());
+    }
+
+    public Money add(Money money) throws Exception {
+        if (null == money) {
+            return this;
+        }
+        if (!money.getCurrency().equals(this.getCurrency())) {
+            throw new Exception("不是相同货币无法计算金额！");
+        }
+        return Money.create(this.value.add(money.getValue()), this.getCurrency());
+    }
+
+    public Money subtract(Money money) throws Exception {
+        if (null == money) {
+            return this;
+        }
+        if (!money.getCurrency().equals(this.getCurrency())) {
+            throw new Exception("不是相同货币无法计算金额！");
+        }
+        return Money.create(this.value.subtract(money.getValue()), this.getCurrency());
     }
 }

@@ -18,6 +18,10 @@ public class Person {
     Name name;
     Phone phone;
 
+    public static Person create(Name name,Phone phone) {
+        return Person.builder().name(name).phone(phone).build();
+    }
+
     /**
      * 姓名手机号
      *

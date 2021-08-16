@@ -25,9 +25,14 @@ public class Contract {
     String code;
     /**
      * 合同签约人
+     *
      * @author lvweijie
      * @date 2021/8/11 22:13
      */
     Person contractor;
     LocalDateTime createTime;
+
+    public static Contract create(String id, String code, Person contractor, LocalDateTime createTime) {
+        return Contract.builder().id(id).code(code).contractor(contractor).createTime(createTime).build();
+    }
 }

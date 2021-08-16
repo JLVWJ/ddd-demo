@@ -14,7 +14,12 @@ import org.lvwj.common.domain.BaseIdentity;
  */
 
 public class OrderId extends BaseIdentity<String> {
-    protected OrderId(String value) {
+
+    OrderId(String value) {
         super(value);
+    }
+
+    public static OrderId create(String value) {
+        return new OrderId(value);
     }
 }

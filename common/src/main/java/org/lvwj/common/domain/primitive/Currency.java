@@ -18,20 +18,36 @@ import lombok.ToString;
 public class Currency {
     /**
      * 符号
+     *
      * @author lvweijie
      * @date 2021/8/15 11:42
      */
     String symbol;
     /**
      * 英文名称
+     *
      * @author lvweijie
      * @date 2021/8/15 11:43
      */
     String enName;
     /**
      * 中文名称
+     *
      * @author lvweijie
      * @date 2021/8/15 11:43
      */
     String chName;
+
+
+    public static Currency create(String symbol, String enName, String chName) {
+        return Currency.builder().symbol(symbol).enName(enName).chName(chName).build();
+    }
+
+    public static Currency create(String symbol) {
+        return Currency.builder().symbol(symbol).build();
+    }
+
+    public static Currency create(String symbol, String chName) {
+        return Currency.builder().symbol(symbol).chName(chName).build();
+    }
 }

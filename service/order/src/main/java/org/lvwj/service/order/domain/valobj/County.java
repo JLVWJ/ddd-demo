@@ -17,4 +17,8 @@ import lombok.ToString;
 public class County {
     String code;
     String name;
+
+    public static County create(String code, String name) {
+        return County.builder().code(code).name(name).build();
+    }
 }

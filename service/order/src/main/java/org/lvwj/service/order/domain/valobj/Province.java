@@ -17,4 +17,8 @@ import lombok.ToString;
 public class Province {
     String code;
     String name;
+
+    public static Province create(String code, String name) {
+        return Province.builder().code(code).name(name).build();
+    }
 }
