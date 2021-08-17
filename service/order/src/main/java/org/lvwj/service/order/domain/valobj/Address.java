@@ -1,9 +1,6 @@
 package org.lvwj.service.order.domain.valobj;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * 值对象：Address，包含省市区等值对象字段和detail字段
@@ -19,6 +16,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
+//@Value  说明：@Value和@Builder都可以标识不可变类，选择@Builder 是因为MapStruct组件支持@Data和@Builder互转，不支持@Data和@Value互转
 public class Address {
     Province province;
     City city;
